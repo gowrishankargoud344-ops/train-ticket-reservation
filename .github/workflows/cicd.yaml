@@ -51,7 +51,7 @@ jobs:
           curl -u "$USER:$PASS" --fail -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
 
-   deploy-TEST:
+  deploy-TEST:
     needs: build
     runs-on: ubuntu-latest
 
