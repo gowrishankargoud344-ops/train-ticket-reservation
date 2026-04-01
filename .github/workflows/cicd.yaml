@@ -30,18 +30,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: war-file
-          path: ${{ env.WAR_FILE }}
-
-    deploy-dev:
+          path: ${{ env.WAR_FILE }} 
+  deploy-DEV:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download WAR artifact
+        uses: actions/download-artifact@v4
         with:
-          name: war-file 
-          
-       - name: Deploy to DEV
+          name: war-file
+
+      - name: Deploy to DEV
         env:
           URL: ${{ secrets.TOMCAT_URL_DEV }}
           USER: ${{ secrets.TOMCAT_USER_DEV }}
@@ -49,10 +49,5 @@ jobs:
         run: |
           WAR_FILE=$(ls *.war | head -n 1)
           echo "Deploying $WAR_FILE to DEV ($URL)"
-
-          echo "Checking Tomcat Manager access..."
-          curl -v -u "$USER:$PASS" "$URL/list"
-
-          echo "Deploying WAR file..."
-          curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
-            "$URL/deploy?path=/train-ticket-reservation&update=true"  
+          curl -u "$USER:$PASS" --fail -T "$WAR_FILE" \
+            "$URL/deploy?path=/train-ticket-reservation&update=true"
