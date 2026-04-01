@@ -70,7 +70,7 @@ jobs:
 
     - name: Upload Artifact to Nexus
       run: mvn deploy -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_REPO_URL }} 
-
+  
         echo "Deploying $WAR_FILE to DEV ($URL)"
 
         curl -u "$USER:$PASS" --fail -T "$WAR_FILE" \
