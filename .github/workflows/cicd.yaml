@@ -30,24 +30,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: war-file
-          path: ${{ env.WAR_FILE }} 
+          path: ${{ env.WAR_FILE }}
 
-    steps:
-      - name: Download WAR artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: war-file
-   
-    # ---------------------------
-    # SonarQube Analysis
-    # ---------------------------
-      - name: Sonar scan
+      - name: SonarQube Analysis
         run: |
-          mvn sonar:sonar \
-          -Dsonar.projectKey=train-ticket-reservation \
-          -Dsonar.host.url="${{ secrets.SONAR_HOST }}" \
-          -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
-
- 
-
-
+         mvn sonar:sonar \
+         -Dsonar.projectKey=train-ticket-reservation \
+         -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
