@@ -31,9 +31,6 @@ jobs:
         with:
           name: war-file
           path: ${{ env.WAR_FILE }} 
-  deploy-DEV:
-    needs: build
-    runs-on: ubuntu-latest
 
     steps:
       - name: Download WAR artifact
