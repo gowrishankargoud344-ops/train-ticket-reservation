@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: train-ticket-reservation
-          image: 733544353237.dkr.ecr.us-west-1.amazonaws.com/gowtham7842:1780057717
+          image: 623817050926.dkr.ecr.us-west-1.amazonaws.com/gowtham:1780133006
           ports:
             - containerPort: 8080
